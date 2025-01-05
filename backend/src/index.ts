@@ -2,7 +2,7 @@ import { Hono } from 'hono'
 import { PrismaClient } from '@prisma/client/edge';
 import {withAccelerate} from '@prisma/extension-accelerate';
 import { env } from 'hono/adapter';
-import { sign } from 'hono/jwt';
+import { sign, verify } from 'hono/jwt';
 
 
 
@@ -13,6 +13,30 @@ const app = new Hono<{
     JWT_SECRET:string
   }
 }>()
+
+
+
+
+
+//middlewares
+
+
+app.use('/api/v1/blog/*', async (c, next)=>{
+
+  const header = c.req.header("authorization") || "";
+  const token = header.split(" ")[1];
+const response = await verify (token, c.env.JWT_SECRET);
+
+
+if(response.id){
+  await next()
+}else{
+  c.status(403)
+  return c.json({error:"Unauthorized"})
+}
+
+  await next();
+})
 
 app.post('/api/v1/signup', async (c)=>{
 
@@ -51,15 +75,16 @@ app.post('/api/v1/signin', async (c)=>{
 
   const user = await prisma.user.findUnique({
     where:{
-      email:bnody.email
+      email:body.email,
+      password:body.password
     }
   })
 
   if(!user){
-    c.status(403);
-    return c.json{
+    c.status(403)
+    return c.json({
       error:"User not found"
-    }
+    })
   }
   const jwt = await sign({id:user.id}, c.env.JWT_SECRET);
   return c.json({jwt})

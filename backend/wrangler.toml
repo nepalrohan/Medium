@@ -7,8 +7,6 @@ compatibility_date = "2025-01-04"
  [vars]
 
 
-JWT_SECRET="asdfasdfasdf"
-
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
 # id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"

@@ -3,7 +3,7 @@ import { Hono } from "hono";
 import { PrismaClient } from '@prisma/client/edge';
 import {withAccelerate} from '@prisma/extension-accelerate';
 import { verify } from "hono/jwt";
-import { verifyuser } from "../middleware/auth";
+import { verifyUser } from "../middleware/auth";
 
 
 export const blogRouter = new Hono<{
@@ -19,7 +19,7 @@ export const blogRouter = new Hono<{
 
 
 
-  blogRouter.use('/*', verifyuser )
+  blogRouter.use('/*', verifyUser )
 
 
 
@@ -118,8 +118,8 @@ return c.json({
 
 
   
-  blogRouter.get('/', async (c)=>{
-    const body =await  c.req.json();
+  blogRouter.get('/:id', async (c)=>{
+    const id =await  c.req.param("id");
 
     const prisma = new PrismaClient({
       datasourceUrl:c.env.DATABASE_URL,
@@ -129,7 +129,7 @@ return c.json({
     try {
       const blog =  await prisma.post.findFirst({
         where:{
-          id:body.id
+          id:id
         }
       })
     

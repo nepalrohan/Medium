@@ -23,7 +23,7 @@ const navigate = useNavigate();
   const response =  await axios.post(`${BACKEND_URL}/api/v1/user/${type === 'signup'? "signup":"signin"}`, postInputs)
       const jwt = response.data.jwt;
       localStorage.setItem("token", "Bearer"+" "+jwt);
-      navigate('/blog')
+      navigate('/blogs')
     } catch (error) {
       console.log(error)
     }

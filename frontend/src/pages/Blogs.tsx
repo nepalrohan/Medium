@@ -1,12 +1,18 @@
 import AppBar from "../components/AppBar"
 import BlogCard from "../components/BlogCard"
+import {BlogSkeleton} from "../components/BlogSkeleton";
 import { useBlogs } from "../hooks";
 
 const Blogs = () => {
 
   const {loading, blogs} = useBlogs();
   if(loading){
-    return <div>Loading...</div>
+    return <div className='w-1/2 mx-auto flex flex-col gap-1 r'>
+      <BlogSkeleton/>
+      <BlogSkeleton/>
+      <BlogSkeleton/>
+      <BlogSkeleton/>
+    </div>
   }
   return (
     <div>
@@ -18,10 +24,10 @@ const Blogs = () => {
 {
   blogs.map((blog)=>{
     return <BlogCard 
-
+    id={blog.id}
     authorName={blog.author.name}
     title={blog.title}
-    content={blog.content || "Anonymus"}
+    content={blog.content || "Anonymous"}
     publishedDate={"2nd Feb 2024"}
     />
   })

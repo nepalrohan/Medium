@@ -90,7 +90,7 @@ interface labelledInputType {
   label:string;
   placeholder:string;
  
-  onChange:(e:ChangeEvent<HTMLInputElement>)=>void;
+  onChange:(e:any)=>void;
   type?:string;
 }
 

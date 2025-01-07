@@ -3,7 +3,6 @@ import AppBar from "../components/AppBar"
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { useNavigate } from "react-router-dom";
-import BlogSkeleton from "../components/BlogSkeleton";
 
 
 interface BlogOnly {

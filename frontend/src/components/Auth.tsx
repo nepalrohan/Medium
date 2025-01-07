@@ -89,7 +89,6 @@ export default Auth
 interface labelledInputType {
   label:string;
   placeholder:string;
- 
   onChange:(e:any)=>void;
   type?:string;
 }

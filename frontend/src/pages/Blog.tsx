@@ -1,5 +1,7 @@
 import FullBlog from "../components/FullBlog";
 import { useBlog } from "../hooks";
+
+
 import { useParams } from "react-router-dom";
 const Blog = () => {
 
@@ -10,7 +12,7 @@ const Blog = () => {
   }
   return (
     <div>
-      <FullBlog blog={blog}  />
+      <FullBlog blog={blog[0]}  />
     </div>
   )
 }

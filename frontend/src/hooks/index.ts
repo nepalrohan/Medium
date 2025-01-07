@@ -5,7 +5,7 @@ import { BACKEND_URL } from "../config";
 
 
 
-export interface Blog {
+export interface BlogType {
 content:string;
 title:string;
 id:string;
@@ -17,7 +17,7 @@ export const useBlogs = ()=>{
 
 
     const [loading, setLoading] = useState(true);
-    const [blogs, setBlogs]= useState<Blog[]>([]);
+    const [blogs, setBlogs]= useState<BlogType[]>([]);
 
 
     useEffect(()=>{
@@ -44,7 +44,7 @@ export const useBlogs = ()=>{
 export const useBlog = ({id}:{id:string})=>{
     
     const [loading, setLoading] = useState(true);
-    const [blog, setBlog]= useState<Blog[]>([]);
+    const [blog, setBlog]= useState<BlogType[]>([]);
 
 
     useEffect(()=>{
